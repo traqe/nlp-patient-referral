@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-export default function InputSymptoms() {
+export default function InputSymptoms({ navigation }) {
 
     const [symptoms, setSymptoms] = useState('');
 
@@ -13,6 +13,7 @@ export default function InputSymptoms() {
     const submitButton = () => {
         if(symptoms != '' ) {
             console.log('this is where your NLP algorithm comes in');
+            navigation.navigate('Results', {'beast': 'canny'});
         }
         else {
             Alert.alert('Empty Input', 'You cannot submit empty symptom input', [{text: 'Ok', onPress: () => console.log('user passed no input')}]);

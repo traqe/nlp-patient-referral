@@ -1,33 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Header from './components/Header';
-import { useState } from 'react';
-import InputSymptoms from './components/InputSymptoms';
-import { FontAwesome6 } from '@expo/vector-icons';
+import React from "react";
+import Home from './screens/home';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import Result from "./screens/Result";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
   return (
-    <TouchableWithoutFeedback onPress={() => {
-      Keyboard.dismiss();
-    }}>
-      <View style={styles.container}>
-          <Header/>
-          <View style={styles.body}>
-            <InputSymptoms />
-          </View>
-      </View>
-    </TouchableWithoutFeedback>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Results" component={Result} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  body: {
-    flex: 1,
-    paddingTop: 20,
-  },
-});
+
