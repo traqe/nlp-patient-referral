@@ -4,6 +4,7 @@ import { StyleSheet, View, Text } from "react-native";
 export default function Result() {
     return (
         <View style={styles.containers}>
+            
             <Text>
                 Result Screen
             </Text>

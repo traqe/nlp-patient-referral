@@ -13,7 +13,7 @@ export default function InputSymptoms({ navigation }) {
     const submitButton = () => {
         if(symptoms != '' ) {
             console.log('this is where your NLP algorithm comes in');
-            navigation.navigate('Results', {'beast': 'canny'});
+            navigation.navigate('Results');
         }
         else {
             Alert.alert('Empty Input', 'You cannot submit empty symptom input', [{text: 'Ok', onPress: () => console.log('user passed no input')}]);
