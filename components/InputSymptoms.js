@@ -28,7 +28,7 @@ export default function InputSymptoms({ navigation }) {
         // split words into array
         const splitWords = lowerCase.split(' ');
 
-        // removing stop words from symptom input
+        // removing stop words from symptom input (to be updated always)
         var symptom_base = [];
 
         splitWords.forEach(element => {
@@ -54,6 +54,7 @@ export default function InputSymptoms({ navigation }) {
             || element ==  "serious" || element ==  "many" || element ==  "few"
             || element ==  "low" || element ==  "little" || element ==  "small"
             || element == "having" || element == "am" || element == "i'am"
+            || element == "just"
 
             ) {
                 symptom_base.push("");
