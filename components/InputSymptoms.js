@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 
+
 export default function InputSymptoms({ navigation }) {
 
     const [symptoms, setSymptoms] = useState('');
@@ -12,12 +13,66 @@ export default function InputSymptoms({ navigation }) {
 
     const submitButton = () => {
         if(symptoms != '' ) {
-            console.log('this is where your NLP algorithm comes in');
-            navigation.navigate('Results');
+            navigation.navigate('Results', {sympt_stems :preprocessor(symptoms)});
         }
         else {
             Alert.alert('Empty Input', 'You cannot submit empty symptom input', [{text: 'Ok', onPress: () => console.log('user passed no input')}]);
         }
+    }
+
+    function preprocessor(input) {
+
+        // small letters
+        const lowerCase = input.toLowerCase();
+
+        // split words into array
+        const splitWords = lowerCase.split(' ');
+
+        var symptom_base = [];
+
+        splitWords.forEach(element => {
+            if (element == "i" 
+            || element ==  "a"
+            || element ==  "and"
+            || element ==  "are"
+            || element ==  "at"
+            || element ==  "as"
+            || element ==  "be"
+            || element ==  "by"
+            || element ==  "for"
+            || element ==  "from"
+            || element ==  "at"
+            || element ==  "has"
+            || element ==  "had"
+            || element ==  "he"
+            || element ==  "was"
+            || element ==  "is"
+            || element ==  "it"
+            || element ==  "its"
+            || element ==  "it's"
+            || element ==  "of"
+            || element ==  "that"
+            || element ==  "the"
+            || element ==  "to"
+            || element ==  "was"
+            || element ==  "were"
+            || element ==  "will"
+            || element ==  "with") {
+                symptom_base.push("");
+            }
+            else {
+                symptom_base.push(element);
+            }
+        });
+
+        /*const removedStopWords = splitWords.filter(removeStopWords);
+        function removeStopWords(word) {
+                return (word != "i");
+            }
+        }*/
+    
+        console.log(symptom_base);
+        return symptom_base;
     }
 
     return (
