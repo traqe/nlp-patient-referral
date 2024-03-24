@@ -13,14 +13,14 @@ export default function InputSymptoms({ navigation }) {
 
     const submitButton = () => {
         if(symptoms != '' ) {
-            navigation.navigate('Results', {sympt_stems :preprocessor(symptoms)});
+            navigation.navigate('Results', {symptom_stems :nlp_preprocessor(symptoms)});
         }
         else {
             Alert.alert('Empty Input', 'You cannot submit empty symptom input', [{text: 'Ok', onPress: () => console.log('user passed no input')}]);
         }
     }
 
-    function preprocessor(input) {
+    function nlp_preprocessor(input) {
 
         // small letters
         const lowerCase = input.toLowerCase();
@@ -28,36 +28,34 @@ export default function InputSymptoms({ navigation }) {
         // split words into array
         const splitWords = lowerCase.split(' ');
 
+        // removing stop words from symptom input
         var symptom_base = [];
 
         splitWords.forEach(element => {
             if (element == "i" 
-            || element ==  "a"
-            || element ==  "and"
-            || element ==  "are"
-            || element ==  "at"
-            || element ==  "as"
-            || element ==  "be"
-            || element ==  "by"
-            || element ==  "for"
-            || element ==  "from"
-            || element ==  "at"
-            || element ==  "has"
-            || element ==  "had"
-            || element ==  "he"
-            || element ==  "was"
-            || element ==  "is"
-            || element ==  "it"
-            || element ==  "its"
-            || element ==  "it's"
-            || element ==  "of"
-            || element ==  "that"
-            || element ==  "the"
-            || element ==  "to"
-            || element ==  "was"
-            || element ==  "were"
-            || element ==  "will"
-            || element ==  "with") {
+            || element ==  "a" || element ==  "and" || element ==  "are"
+            || element ==  "at" || element ==  "as" || element ==  "be"
+            || element ==  "by" || element ==  "for" || element ==  "from"
+            || element ==  "at" || element ==  "has" || element ==  "had"
+            || element ==  "he" || element ==  "was" || element ==  "is"
+            || element ==  "it" || element ==  "its" || element ==  "it's"
+            || element ==  "of" || element ==  "that" || element ==  "the"
+            || element ==  "to" || element ==  "you" || element ==  "were"
+            || element ==  "will" || element ==  "with" || element ==  "we"
+            || element ==  "they" || element ==  "this" || element ==  "these"
+            || element ==  "those" || element ==  "some" || element ==  "any"
+            || element ==  "no" || element ==  "every" || element ==  "other"
+            || element ==  "such" || element ==  "can" || element ==  "could"
+            || element ==  "would" || element ==  "shall" || element ==  "should"
+            || element ==  "may" || element ==  "might" || element ==  "must"
+            || element ==  "ought" || element ==  "morning" || element ==  "afternoon"
+            || element ==  "evening" || element ==  "night" || element ==  "sleeping"
+            || element ==  "suffer" || element ==  "suffering" || element ==  "have"
+            || element ==  "serious" || element ==  "many" || element ==  "few"
+            || element ==  "low" || element ==  "little" || element ==  "small"
+            || element == "having" || element == "am" || element == "i'am"
+
+            ) {
                 symptom_base.push("");
             }
             else {
@@ -65,14 +63,14 @@ export default function InputSymptoms({ navigation }) {
             }
         });
 
-        /*const removedStopWords = splitWords.filter(removeStopWords);
-        function removeStopWords(word) {
-                return (word != "i");
-            }
-        }*/
-    
-        console.log(symptom_base);
-        return symptom_base;
+        // removing empty array elements from symptom_base
+        const finalSymptoms = symptom_base.filter(removeEmpty);
+
+        function removeEmpty(symptom) {
+            return symptom != "";
+        }
+        console.log(finalSymptoms);
+        return finalSymptoms;
     }
 
     return (

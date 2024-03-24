@@ -3,14 +3,14 @@ import { StyleSheet, View, Text } from "react-native";
 
 export default function Result({ route, navigation }) {
 
-    const {sympt_stems} = route.params;
+    const {symptom_stems} = route.params;
 
     return (
         <View style={styles.containers}>
             
             <Text>
-                Result Screen
-                {sympt_stems}
+                Symptoms: 
+                {symptom_stems}
             </Text>
         </View>
     )
