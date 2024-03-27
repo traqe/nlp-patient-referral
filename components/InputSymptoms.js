@@ -13,7 +13,7 @@ export default function InputSymptoms({ navigation }) {
 
     const submitButton = () => {
         if(symptoms != '' ) {
-            navigation.navigate('Results', {symptom_stems :nlp_preprocessor(symptoms)});
+            navigation.navigate('Results', {symptom_stems :nlp_preprocessor(symptoms), doctor: 1});
         }
         else {
             Alert.alert('Empty Input', 'You cannot submit empty symptom input', [{text: 'Ok', onPress: () => console.log('user passed no input')}]);
@@ -54,7 +54,7 @@ export default function InputSymptoms({ navigation }) {
             || element ==  "serious" || element ==  "many" || element ==  "few"
             || element ==  "low" || element ==  "little" || element ==  "small"
             || element == "having" || element == "am" || element == "i'am"
-            || element == "just"
+            || element == "just" || element == "still" || element == "got"
 
             ) {
                 symptom_base.push("");
