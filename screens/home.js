@@ -1,10 +1,8 @@
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import Header from '../components/Header';
 import InputSymptoms from '../components/InputSymptoms';
 
 
 export default function Home({ navigation }) {
-
     
     return (
       <TouchableWithoutFeedback onPress={() => {

@@ -39,8 +39,7 @@ export default function InputSymptoms({ navigation }) {
             || element ==  "at" || element ==  "has" || element ==  "had"
             || element ==  "he" || element ==  "was" || element ==  "is"
             || element ==  "it" || element ==  "its" || element ==  "it's"
-            || element ==  "of" || element ==  "that" || element ==  "the"
-            || element ==  "to" || element ==  "you" || element ==  "were"
+            || element ==  "that" || element ==  "the" || element ==  "to"
             || element ==  "will" || element ==  "with" || element ==  "we"
             || element ==  "they" || element ==  "this" || element ==  "these"
             || element ==  "those" || element ==  "some" || element ==  "any"
@@ -55,6 +54,7 @@ export default function InputSymptoms({ navigation }) {
             || element ==  "low" || element ==  "little" || element ==  "small"
             || element == "having" || element == "am" || element == "i'am"
             || element == "just" || element == "still" || element == "got"
+            || element ==  "you" || element ==  "were"
 
             ) {
                 symptom_base.push("");
