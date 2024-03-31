@@ -54,7 +54,8 @@ export default function InputSymptoms({ navigation }) {
             || element ==  "low" || element ==  "little" || element ==  "small"
             || element == "having" || element == "am" || element == "i'am"
             || element == "just" || element == "still" || element == "got"
-            || element ==  "you" || element ==  "were"
+            || element ==  "you" || element ==  "were" || element ==  "did"
+            || element ==  "not" || element ==  "know" || element ==  "didn't"
 
             ) {
                 symptom_base.push("");

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import Card from "../shared/Card";
 
 export default function Result({ route, navigation }) {
@@ -27,36 +27,24 @@ export default function Result({ route, navigation }) {
 
     // doctor dataset
     const doctors = [
-        {id: 1, name: 'Dr. Amani Nkosi', image: null, specialty: 'Infectious Disease Specialist'},
-        {id: 2, name: 'Dr. Kwame Osei', image: null, specialty: 'Gastroenterologist'},
-        {id: 3, name: 'Dr. Zara Abasi', image: null, specialty: 'Endocrinologist/Cardiologist'},
-        {id: 4, name: 'Dr. Tendai Mbeki', image: null, specialty: 'Pulmonologist/Allegist'},
-        {id: 5, name: 'Dr. Sanaa Juma', image: null, specialty: 'Hepatologist'},
-        {id: 6, name: 'Dr. Jabari Sibanda', image: null, specialty: 'Neurologist'},
-        {id: 7, name: 'Dr. Niazi Chikwamba', image: null, specialty: 'Dermatologist'},
-        {id: 8, name: 'Dr. Avodele Nkrumah', image: null, specialty: 'Urologist'}
+        {id: 1, name: 'Dr. Amani Nkosi', image: '../assets/amani_nkosi.png', specialty: 'Infectious Disease Specialist'},
+        {id: 2, name: 'Dr. Kwame Osei', image: '../assets/kwame_osei.png', specialty: 'Gastroenterologist'},
+        {id: 3, name: 'Dr. Zara Abasi', image: '../assets/zara_abasi.png', specialty: 'Endocrinologist/Cardiologist'},
+        {id: 4, name: 'Dr. Tendai Mbeki', image: '../assets/tendai_mbeki.png', specialty: 'Pulmonologist/Allegist'},
+        {id: 5, name: 'Dr. Sanaa Juma', image: '../assets/sanaa_juma.png', specialty: 'Hepatologist'},
+        {id: 6, name: 'Dr. Jabari Sibanda', image: '../assets/jabari_sibanda.png', specialty: 'Neurologist'},
+        {id: 7, name: 'Dr. Niazi Chikwamba', image: '../assets/niazi_chikwamba.png', specialty: 'Dermatologist'},
+        {id: 8, name: 'Dr. Avodele Nkrumah', image: '../assets/avodele_nkrumah.png', specialty: 'Urologist'}
     ]
-
-    // test
-    function changeProbability() {
-        dataset.forEach(element => {
-            if (element.disease == 'Typhoid') {
-                element.probability = 1;
-            }
-        });
-        console.log(dataset);
-    }
-
-    changeProbability();
 
     // information being read from first screen
     const {symptom_stems, doctor} = route.params;
 
     return (
-        <View style={styles.containers}>
+        <View style={styles.container}>
             <Text>
-                <Card>
-                    <Text>{symptom_stems}</Text>
+                <Card style={styles.card}>
+                    <Text>{doctors[0].name}</Text>
                 </Card>
             </Text>
         </View>
@@ -65,8 +53,7 @@ export default function Result({ route, navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 24,
+        padding: 16,
         flex: 1,
-        alignItems: "center",
-    }
+    },
 })
