@@ -71,7 +71,7 @@ export default function InputSymptoms({ navigation }) {
         function removeEmpty(symptom) {
             return symptom != "";
         }
-        console.log(finalSymptoms);
+        console.log("NLP preprocessing", finalSymptoms);
         return finalSymptoms;
     }
 

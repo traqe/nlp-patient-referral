@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import Card from "../shared/Card";
+import { images } from "../components/DoctorImages"; 
 
 export default function Result({ route, navigation }) {
 
@@ -27,24 +28,31 @@ export default function Result({ route, navigation }) {
 
     // doctor dataset
     const doctors = [
-        {id: 1, name: 'Dr. Amani Nkosi', image: '../assets/amani_nkosi.png', specialty: 'Infectious Disease Specialist'},
-        {id: 2, name: 'Dr. Kwame Osei', image: '../assets/kwame_osei.png', specialty: 'Gastroenterologist'},
-        {id: 3, name: 'Dr. Zara Abasi', image: '../assets/zara_abasi.png', specialty: 'Endocrinologist/Cardiologist'},
-        {id: 4, name: 'Dr. Tendai Mbeki', image: '../assets/tendai_mbeki.png', specialty: 'Pulmonologist/Allegist'},
-        {id: 5, name: 'Dr. Sanaa Juma', image: '../assets/sanaa_juma.png', specialty: 'Hepatologist'},
-        {id: 6, name: 'Dr. Jabari Sibanda', image: '../assets/jabari_sibanda.png', specialty: 'Neurologist'},
-        {id: 7, name: 'Dr. Niazi Chikwamba', image: '../assets/niazi_chikwamba.png', specialty: 'Dermatologist'},
-        {id: 8, name: 'Dr. Avodele Nkrumah', image: '../assets/avodele_nkrumah.png', specialty: 'Urologist'}
+        {id: 1, name: 'Dr. Amani Nkosi', image: 'amani_nkosi', specialty: 'Infectious Disease Specialist'},
+        {id: 2, name: 'Dr. Kwame Osei', image: 'kwame_osei', specialty: 'Gastroenterologist'},
+        {id: 3, name: 'Dr. Zara Abasi', image: 'zara_abasi', specialty: 'Endocrinologist/Cardiologist'},
+        {id: 4, name: 'Dr. Tendai Mbeki', image: 'tendai_mbeki', specialty: 'Pulmonologist/Allegist'},
+        {id: 5, name: 'Dr. Sanaa Juma', image: 'sanaa_juma', specialty: 'Hepatologist'},
+        {id: 6, name: 'Dr. Jabari Sibanda', image: 'jabari_sibanda', specialty: 'Neurologist'},
+        {id: 7, name: 'Dr. Niazi Chikwamba', image: 'niazi_chikwamba', specialty: 'Dermatologist'},
+        {id: 8, name: 'Dr. Avodele Nkrumah', image: 'avodele_nkrumah', specialty: 'Urologist'}
     ]
 
     // information being read from first screen
     const {symptom_stems, doctor} = route.params;
 
+    // result of referred doctor is put in this variable
+    const doctorSelected = doctors[1];
+
     return (
         <View style={styles.container}>
             <Text>
                 <Card style={styles.card}>
-                    <Text>{doctors[0].name}</Text>
+                    <View style={styles.cardContainer}>
+                        <Image style={styles.avatarImage} source={images.doctors[doctorSelected.image]}/>
+                        <Text style={styles.doctorName}>{doctorSelected.name}</Text>
+                        <Text style={styles.doctorSpecialist}>{doctorSelected.specialty}</Text>
+                    </View>
                 </Card>
             </Text>
         </View>
@@ -56,4 +64,28 @@ const styles = StyleSheet.create({
         padding: 16,
         flex: 1,
     },
+    cardContainer: {
+        height: 270,
+        width: 326,
+        alignItems: "center",
+    },
+    avatarImage: {
+        borderRadius: 120,
+        height: 150,
+        width: 150,
+        marginBottom: 25,
+        borderColor: '#000000',
+          borderWidth: 2,
+    },
+    doctorName: {
+        fontSize: 23,
+        fontWeight: "bold",
+        marginBottom: 10,
+        letterSpacing: 0.5,
+        color: "#191919"
+    },
+    doctorSpecialist: {
+        fontStyle: "italic",
+        color: "#191919"
+    }
 })
