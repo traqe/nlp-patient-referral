@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import Card from "../shared/Card";
-import { images } from "../components/DoctorImages"; 
+import { images } from "../components/DoctorImages";
+import { stringSimilarity } from "string-similarity-js"; 
 
 export default function Result({ route, navigation }) {
 
@@ -39,7 +40,13 @@ export default function Result({ route, navigation }) {
     ]
 
     // information being read from first screen
-    const {symptom_stems, doctor} = route.params;
+    const {symptom_stems} = route.params;
+
+    /* text-classifier will work here.
+    to connect the input from previous screen
+     x 
+    the selected doctor below */
+    console.log(stringSimilarity('i went to church','church to went i'), "this is the similarity");
 
     // result of referred doctor is put in this variable
     const doctorSelected = doctors[1];

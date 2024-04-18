@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-
+import { stringSimilarity } from "string-similarity-js";
 
 export default function InputSymptoms({ navigation }) {
 
@@ -13,7 +13,7 @@ export default function InputSymptoms({ navigation }) {
 
     const submitButton = () => {
         if(symptoms != '' ) {
-            navigation.navigate('Results', {symptom_stems :nlp_preprocessor(symptoms), doctor: 1});
+            navigation.navigate('Results', {symptom_stems :nlp_preprocessor(symptoms)});
         }
         else {
             Alert.alert('Empty Input', 'You cannot submit empty symptom input', [{text: 'Ok', onPress: () => console.log('user passed no input')}]);
