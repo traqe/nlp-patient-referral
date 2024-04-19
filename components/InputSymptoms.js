@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { stringSimilarity } from "string-similarity-js";
+
 
 export default function InputSymptoms({ navigation }) {
 
@@ -71,7 +71,8 @@ export default function InputSymptoms({ navigation }) {
         function removeEmpty(symptom) {
             return symptom != "";
         }
-        console.log("NLP preprocessing", finalSymptoms);
+        // this displays the symptoms that remain after removing stop words.
+        console.log("[NLP preprocessing 1st stage]:", finalSymptoms);
         return finalSymptoms;
     }
 

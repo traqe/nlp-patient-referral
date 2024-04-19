@@ -43,18 +43,16 @@ export default function Result({ route, navigation }) {
     // information being read from first screen
     const {symptom_stems} = route.params;
 
-    // text-classifier nlp code
-    //stringSimilarity("symptoms", "x: dataset");
     function nlpTextClassifier() {
 
-        const success = null;
+        // combine elements into symptom sentence
         const symptoms = symptom_stems.join(" ");
 
         // find probalilty of each symptom in dataset against the input symptom
         dataset.forEach(disease => {
             disease.probability = stringSimilarity(symptoms, disease.symptom);
         });
-        //console.log(dataset);
+    
         // find the one that has the maximum probability
         var maxDisease = dataset[0]
         dataset.forEach(iteratedDisease => {
@@ -74,15 +72,17 @@ export default function Result({ route, navigation }) {
         }
     }
 
-    console.log(nlpTextClassifier())
+    // display resultant disease identified
+    console.log("[disease identified]:", nlpTextClassifier())
     
     // result of referred doctor is put in this variable
     const doctorSelectedID = (nlpTextClassifier() != null ? nlpTextClassifier().doctor_id : 9 );
-    console.log(doctorSelectedID);
+    console.log("[selected doctor id]:", doctorSelectedID);
 
+    // id - 1 = index (correct position of the doctor selected)
     const doctorSelected = doctors[doctorSelectedID - 1];
     
-    console.log(doctorSelected);
+    console.log("[selected doctor]:", doctorSelected);
 
     return (
         <View style={styles.container}>
