@@ -36,20 +36,53 @@ export default function Result({ route, navigation }) {
         {id: 5, name: 'Dr. Sanaa Juma', image: 'sanaa_juma', specialty: 'Hepatologist'},
         {id: 6, name: 'Dr. Jabari Sibanda', image: 'jabari_sibanda', specialty: 'Neurologist'},
         {id: 7, name: 'Dr. Niazi Chikwamba', image: 'niazi_chikwamba', specialty: 'Dermatologist'},
-        {id: 8, name: 'Dr. Avodele Nkrumah', image: 'avodele_nkrumah', specialty: 'Urologist'}
+        {id: 8, name: 'Dr. Avodele Nkrumah', image: 'avodele_nkrumah', specialty: 'Urologist'},
+        {id: 9, name: 'No Doctor Was identified', image: 'no_doctor', specialty: 'Symptoms not classified'}
     ]
 
     // information being read from first screen
     const {symptom_stems} = route.params;
 
-    /* text-classifier will work here.
-    to connect the input from previous screen
-     x 
-    the selected doctor below */
-    console.log(stringSimilarity('i went to church','church to went i'), "this is the similarity");
+    // text-classifier nlp code
+    //stringSimilarity("symptoms", "x: dataset");
+    function nlpTextClassifier() {
 
+        const success = null;
+        const symptoms = symptom_stems.join(" ");
+
+        // find probalilty of each symptom in dataset against the input symptom
+        dataset.forEach(disease => {
+            disease.probability = stringSimilarity(symptoms, disease.symptom);
+        });
+        //console.log(dataset);
+        // find the one that has the maximum probability
+        var maxDisease = dataset[0]
+        dataset.forEach(iteratedDisease => {
+            if (iteratedDisease.probability > maxDisease.probability) {
+                maxDisease = iteratedDisease;
+            }
+        });
+        
+        // if max probability available
+        if (maxDisease.probability > 0) {
+            // classification successful
+            return maxDisease;
+        }
+        else {
+            // classification unsuccessful
+            return null;
+        }
+    }
+
+    console.log(nlpTextClassifier())
+    
     // result of referred doctor is put in this variable
-    const doctorSelected = doctors[1];
+    const doctorSelectedID = (nlpTextClassifier() != null ? nlpTextClassifier().doctor_id : 9 );
+    console.log(doctorSelectedID);
+
+    const doctorSelected = doctors[doctorSelectedID - 1];
+    
+    console.log(doctorSelected);
 
     return (
         <View style={styles.container}>
