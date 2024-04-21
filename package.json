@@ -19,8 +19,7 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-navigation": "^5.0.0",
-    "string-similarity-js": "^2.1.4",
-    "whichx": "^3.0.1"
+    "string-similarity-js": "^2.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
