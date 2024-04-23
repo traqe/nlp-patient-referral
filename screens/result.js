@@ -1,10 +1,14 @@
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import Card from "../shared/Card";
 import { images } from "../components/DoctorImages";
 import { stringSimilarity } from "string-similarity-js"; 
 
 export default function Result({ route, navigation }) {
+
+    const showDescrition = (input) => {
+        Alert.alert(input.specialty, input.description, [{text: 'Ok', onPress: () => console.log('specialty description shown')}]);
+    }
 
     // dataset of symptom-disease-doctor
     const dataset = [
@@ -29,15 +33,15 @@ export default function Result({ route, navigation }) {
 
     // doctor dataset
     const doctors = [
-        {id: 1, name: 'Dr. Amani Nkosi', image: 'amani_nkosi', specialty: 'Infectious Disease Specialist'},
-        {id: 2, name: 'Dr. Kwame Osei', image: 'kwame_osei', specialty: 'Gastroenterologist'},
-        {id: 3, name: 'Dr. Zara Abasi', image: 'zara_abasi', specialty: 'Endocrinologist/Cardiologist'},
-        {id: 4, name: 'Dr. Tendai Mbeki', image: 'tendai_mbeki', specialty: 'Pulmonologist/Allegist'},
-        {id: 5, name: 'Dr. Sanaa Juma', image: 'sanaa_juma', specialty: 'Hepatologist'},
-        {id: 6, name: 'Dr. Jabari Sibanda', image: 'jabari_sibanda', specialty: 'Neurologist'},
-        {id: 7, name: 'Dr. Niazi Chikwamba', image: 'niazi_chikwamba', specialty: 'Dermatologist'},
-        {id: 8, name: 'Dr. Avodele Nkrumah', image: 'avodele_nkrumah', specialty: 'Urologist'},
-        {id: 9, name: 'No Doctor Was identified', image: 'no_doctor', specialty: 'Symptoms not classified'}
+        {id: 1, name: 'Dr. Amani Nkosi', image: 'amani_nkosi', specialty: 'Infectious Disease Specialist', description: 'Infectious disease doctors are healthcare providers who specialize in diagnosing and treating conditions caused by bacteria, parasites, viruses and fungi.'},
+        {id: 2, name: 'Dr. Kwame Osei', image: 'kwame_osei', specialty: 'Gastroenterologist', description: ' A gastroenterologist is a medical doctor who specializes in conditions affecting your digestive system.'},
+        {id: 3, name: 'Dr. Zara Abasi', image: 'zara_abasi', specialty: 'Endocrinologist/Cardiologist', description: 'Endocrinologists specialize in treating disorders of the endocrine system, the network of hormone-producing glands in your body.'},
+        {id: 4, name: 'Dr. Tendai Mbeki', image: 'tendai_mbeki', specialty: 'Pulmonologist/Allegist', description: 'A pulmonologist is a doctor who specializes in lung conditions. A pulmonologist diagnoses and treats diseases of the respiratory system.'},
+        {id: 5, name: 'Dr. Sanaa Juma', image: 'sanaa_juma', specialty: 'Hepatologist', description: 'Hepatologists are medical doctors trained and certified to diagnose and treat various liver conditions.'},
+        {id: 6, name: 'Dr. Jabari Sibanda', image: 'jabari_sibanda', specialty: 'Neurologist', description: 'a medical specialist in the diagnosis and treatment of disorders of the nervous system.'},
+        {id: 7, name: 'Dr. Niazi Chikwamba', image: 'niazi_chikwamba', specialty: 'Dermatologist', description: 'A dermatologist is a doctor that specializes in treating skin, hair, nail, and mucous membrane disorders and diseases.'},
+        {id: 8, name: 'Dr. Avodele Nkrumah', image: 'avodele_nkrumah', specialty: 'Urologist', description: 'a doctor who specializes in the study or treatment of the function and disorders of the urinary system.'},
+        {id: 9, name: 'No Doctor Was identified', image: 'no_doctor', specialty: 'Symptoms not classified', description: 'Symptoms not classified'}
     ]
 
     // information being read from first screen
@@ -85,19 +89,21 @@ export default function Result({ route, navigation }) {
     console.log("[selected doctor]:", doctorSelected);
 
     return (
-        <View style={styles.container}>
-            <Text>
-                <Card style={styles.card}>
-                    <View style={styles.cardContainer}>
-                        <Image style={styles.avatarImage} source={images.doctors[doctorSelected.image]}/>
-                        <Text style={styles.doctorName}>{doctorSelected.name}</Text>
-                        <Text style={styles.doctorSpecialist}>{doctorSelected.specialty}</Text>
-                    </View>
-                </Card>
-            </Text>
-        </View>
-    )
-}
+            <View style={styles.container}>
+                <TouchableOpacity onPress={() => showDescrition(doctorSelected)}>
+                <Text>
+                    <Card style={styles.card}>
+                        <View onPress={() => showDescrition(doctorSelected)} style={styles.cardContainer}>
+                            <Image style={styles.avatarImage} source={images.doctors[doctorSelected.image]}/>
+                            <Text style={styles.doctorName}>{doctorSelected.name}</Text>
+                            <Text style={styles.doctorSpecialist}>{doctorSelected.specialty}</Text>
+                        </View>
+                    </Card>
+                </Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 
 const styles = StyleSheet.create({
     container: {
@@ -114,6 +120,7 @@ const styles = StyleSheet.create({
         height: 150,
         width: 150,
         marginBottom: 25,
+        marginTop: 20,
         borderColor: '#000000',
           borderWidth: 2,
     },
@@ -126,6 +133,7 @@ const styles = StyleSheet.create({
     },
     doctorSpecialist: {
         fontStyle: "italic",
-        color: "#191919"
+        color: "#191919",
+        fontWeight: 'bold'
     }
 })
